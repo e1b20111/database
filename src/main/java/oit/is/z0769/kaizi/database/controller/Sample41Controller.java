@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import oit.is.z0769.kaizi.database.model.Chamber;
 import oit.is.z0769.kaizi.database.model.ChamberMapper;
 import oit.is.z0769.kaizi.database.model.ChamberUser;
+import oit.is.z0769.kaizi.database.model.UserInfo;
 
 /**
  * /sample4へのリクエストを扱うクラス authenticateの設定をしていれば， /sample4へのアクセスはすべて認証が必要になる
@@ -96,6 +97,26 @@ public class Sample41Controller {
   @GetMapping("step7")
   @Transactional
   public String sample47(ModelMap model) {
+    ArrayList<ChamberUser> chamberUsers7 = chamberMapper.selectAllChamberUser();
+    model.addAttribute("chamberUsers7", chamberUsers7);
+    return "sample46.html";
+  }
+
+
+  @PostMapping("step8")
+  @Transactional
+  public String sample48(@RequestParam Double height, @RequestParam Integer age, ModelMap model, Principal prin) {
+    String loginUser = prin.getName(); // ログインユーザ情報
+    UserInfo ui = new UserInfo();
+    ui.setUserName(loginUser);
+    ui.setAge(age);
+    ui.setHeight(height);
+    try {
+      chamberMapper.insertUserInfo(ui);
+    } catch (RuntimeException e) {// 既に身長が登録されているユーザでさらに登録しようとすると実行時例外が発生するので，コンソールに出力してinsertをSkipする
+      System.out.println("Exception:" + e.getMessage());
+    }
+    // insert後にすべての身長が登録されているユーザを取得する
     ArrayList<ChamberUser> chamberUsers7 = chamberMapper.selectAllChamberUser();
     model.addAttribute("chamberUsers7", chamberUsers7);
     return "sample46.html";
