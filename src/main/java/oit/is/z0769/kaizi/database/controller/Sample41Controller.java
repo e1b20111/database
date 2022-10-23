@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import oit.is.z0769.kaizi.database.model.Chamber;
 import oit.is.z0769.kaizi.database.model.ChamberMapper;
+import oit.is.z0769.kaizi.database.model.ChamberUser;
 
 /**
  * /sample4へのリクエストを扱うクラス authenticateの設定をしていれば， /sample4へのアクセスはすべて認証が必要になる
@@ -90,6 +91,14 @@ public class Sample41Controller {
     ArrayList<Chamber> chambers5 = chamberMapper.selectAllByChamberName(chamberName);
     model.addAttribute("chambers5", chambers5);
     return "sample45.html";
+  }
+
+  @GetMapping("step7")
+  @Transactional
+  public String sample47(ModelMap model) {
+    ArrayList<ChamberUser> chamberUsers7 = chamberMapper.selectAllChamberUser();
+    model.addAttribute("chamberUsers7", chamberUsers7);
+    return "sample46.html";
   }
 
 }
