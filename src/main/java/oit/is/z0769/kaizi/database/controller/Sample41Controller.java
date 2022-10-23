@@ -35,6 +35,11 @@ public class Sample41Controller {
     return "sample43.html";
   }
 
+  @GetMapping("step5")
+  public String sample45() {
+    return "sample45.html";
+  }
+
   /**
    * 指定したidをPATHパラメータで受け取り，そのidに対応するデータを取得して返す
    *
@@ -70,7 +75,7 @@ public class Sample41Controller {
     chamberMapper.insertChamber(chamber3);
     model.addAttribute("chamber3", chamber3);
     // System.out.println("ID:" + chamber3.getId());
-    
+
     return "sample43.html";
   }
 }
