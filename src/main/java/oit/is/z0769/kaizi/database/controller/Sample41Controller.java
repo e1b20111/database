@@ -70,6 +70,7 @@ public class Sample41Controller {
     chamberMapper.insertChamber(chamber3);
     model.addAttribute("chamber3", chamber3);
     // System.out.println("ID:" + chamber3.getId());
+    
     return "sample43.html";
   }
 }
